@@ -182,7 +182,8 @@ Emarsys::Event.trigger(65, key_id: 3, external_id: "test@example.com")
 
 # Trigger a custom event which actually sends a mail
 # (Emarsys way to send transactional mails with placeholders)
-Emarsys::Event.trigger(2, key_id: 3, external_id: 'test@example.com', data: {:global => {:my_placeholder => "some content"}})
+Emarsys::Event.trigger(2, key_id: 3, external_id: 'test@example.com', data: {:global => {:my_placeholder => "some content"}, attachment: [ {"filename": "receipt.pdf", "data": "fVIOdiIMBLWUKF..."
+               }} ]})
 ```
 
 #### Export

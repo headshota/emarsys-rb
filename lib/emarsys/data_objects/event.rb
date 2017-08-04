@@ -27,10 +27,11 @@ module Emarsys
       # @example
       #   Emarsys::Event.trigger(2, 3, 'test@example.com')
       #   Emarsys::Event.trigger(2, 'user_id', 57687, {:global => {:name => "Special Name"}})
-      def trigger(id, key_id:, external_id:, data: {}, account: nil)
+      def trigger(id, key_id:, external_id:, data: {}, account: nil, attachment: [])
         transformed_key_id = transform_key_id(key_id)
         params = {:key_id => transformed_key_id, :external_id => external_id}
         params.merge!(:data => data) if not data.empty?
+        params.merge!(:attachment => attachment) if not attachment.empty?
         post account, "event/#{id}/trigger", params
       end
 
