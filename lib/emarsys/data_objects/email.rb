@@ -87,8 +87,18 @@ module Emarsys
       # @return [Hash] Result data
       # @example
       #   Emarsys::Email.response_summary(1)
-      def response_summary(id, account: nil)
-        get account, "email/#{id}/responsesummary", {}
+      def response_summary(id, launch_id: nil, start_date:nil, end_date: nil, account: nil)
+        params = {}
+
+        if !launch_id.nil?
+          params.merge!(launch_id: launch_id) 
+        end
+
+        if !start_date.nil? && !end_date.nil?
+          params.merge!(start_date: start_date, end_date: end_date)
+        end
+
+        get account, "email/#{id}/responsesummary", params
       end
 
       # Instruct emarsys to send a test mail
